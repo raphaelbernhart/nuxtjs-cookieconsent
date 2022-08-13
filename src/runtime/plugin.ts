@@ -27,7 +27,7 @@ export default defineNuxtPlugin((nuxtApp) => {
         // Enable/Disable darkmode
         if (options.styles?.dark?.enabledByDefault)
             document.body.classList.add('c_darkmode');
-        else if (!options.styke?.dark?.enabledByDefault)
+        else if (!options.styles?.dark?.enabledByDefault)
             document.body.classList.remove('c_darkmode');
 
         const ccOptions: Record<string, any> = {};
