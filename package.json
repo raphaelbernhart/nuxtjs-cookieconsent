@@ -3,6 +3,8 @@
     "version": "0.0.1",
     "license": "MIT",
     "type": "module",
+    "repository": "https://github.com/raphaelbernhart/nuxt-cookieconsent.git",
+    "author": "raphaelbernhart <mail@raphaelbernhart.at>",
     "exports": {
         ".": {
             "import": "./dist/module.mjs",
