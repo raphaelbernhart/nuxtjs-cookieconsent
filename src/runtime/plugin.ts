@@ -2,7 +2,6 @@
 import { defineNuxtPlugin } from '#app';
 import options from '#nuxt-cookieconsent/options';
 import 'vanilla-cookieconsent/dist/cookieconsent.js';
-import 'vanilla-cookieconsent/dist/cookieconsent.css';
 import { createHooks } from 'hookable';
 import cssHelper from './cssHelper';
 

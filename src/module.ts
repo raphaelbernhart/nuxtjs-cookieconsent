@@ -107,5 +107,6 @@ export default defineNuxtModule<ModuleOptions>({
 
         const { resolve } = createResolver(import.meta.url);
         addPlugin(resolve('./runtime/plugin'), options as AddPluginOptions);
+        nuxt.options.css.push('vanilla-cookieconsent/dist/cookieconsent.css');
     },
 });
