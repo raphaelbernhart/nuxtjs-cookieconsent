@@ -1,0 +1,38 @@
+name: Publish-Package
+
+on:
+    push:
+        branches: [main]
+
+    # Allows to run this workflow manually from the Actions tab
+    workflow_dispatch:
+
+jobs:
+    test:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v3
+            - uses: actions/setup-node@v3
+              with:
+                  node-version: 16
+            - run: npm install --global yarn
+            - run: yarn install
+            - run: yarn global add typescript
+            - run: yarn run dev:prepare && yarn run dev
+
+    publish:
+        needs: test
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v3
+            - uses: actions/setup-node@v3
+              with:
+                  node-version: 16
+            - run: npm install --global yarn
+            - run: yarn install
+            - run: yarn global add typescript
+            - run: yarn run prepack
+            - run: ls -a
+            - uses: JS-DevTools/npm-publish@v1
+              with:
+                  token: ${{ secrets.NPM_TOKEN }}
