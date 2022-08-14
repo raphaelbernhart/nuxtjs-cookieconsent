@@ -1,6 +1,6 @@
 /* eslint-disable import/order */
 import { defineNuxtPlugin } from '#app';
-import options from '#nuxt-cookieconsent/options';
+import options from '#nuxtjs-cookieconsent/options';
 import 'vanilla-cookieconsent/dist/cookieconsent.js';
 import { createHooks } from 'hookable';
 import cssHelper from './cssHelper';

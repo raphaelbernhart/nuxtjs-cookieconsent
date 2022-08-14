@@ -91,19 +91,19 @@ export declare interface ModuleOptions {
 
 export default defineNuxtModule<ModuleOptions>({
     meta: {
-        name: 'nuxt-cookieconsent',
+        name: 'nuxtjs-cookieconsent',
         configKey: 'cookieconsent',
     },
     // defaults: {},
     setup(options, nuxt) {
         // Export Module Options
         const mockTemplate = addTemplate({
-            filename: 'nuxt-cookieconsent-options.mjs',
+            filename: 'nuxtjs-cookieconsent-options.mjs',
             getContents() {
                 return `export default ${JSON.stringify(options)}`;
             },
         });
-        nuxt.options.alias['#nuxt-cookieconsent/options'] = mockTemplate.dst;
+        nuxt.options.alias['#nuxtjs-cookieconsent/options'] = mockTemplate.dst;
 
         const { resolve } = createResolver(import.meta.url);
         addPlugin(resolve('./runtime/plugin'), options as AddPluginOptions);
