@@ -16,9 +16,10 @@ jobs:
               with:
                   node-version: 16
             - run: npm install --global yarn
-            - run: yarn install
+            - run: yarn
             - run: yarn global add typescript
-            - run: yarn run dev:prepare && yarn run dev
+            - run: yarn run dev:prepare
+            - run: timeout 15 yarn run dev || code=$?; if [[ $code -ne 124 && $code -ne 0 ]]; then exit $code; fi
 
     publish:
         needs: test
@@ -31,8 +32,8 @@ jobs:
             - run: npm install --global yarn
             - run: yarn install
             - run: yarn global add typescript
+            - run: yarn run dev:prepare
             - run: yarn run prepack
-            - run: ls -a
             - uses: JS-DevTools/npm-publish@v1
               with:
                   token: ${{ secrets.NPM_TOKEN }}
