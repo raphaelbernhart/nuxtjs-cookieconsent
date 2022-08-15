@@ -3,19 +3,19 @@ import {
     addPlugin,
     createResolver,
     addTemplate,
-    AddPluginOptions,
 } from '@nuxt/kit';
 
-// TODO - finish Module Options (https://github.com/orestbida/cookieconsent#key-features)
 export declare interface ModuleOptions {
     /** Show the cookie consent as soon as possible (otherwise you need to manually call the .show() method) [boolean] */
     autorun: boolean;
     /** Number of milliseconds before showing the consent-modal [number] */
     delay: number;
-    /** Accepted values:
-    - opt-in: scripts will not run unless consent is given (gdpr compliant)
-    - opt-out: scripts — that have categories set as enabled by default — will run without consent, until an explicit choice is made [string] */
-    mode: string;
+    /**
+     * @defaultvalue 'opt-in'
+     * @description
+     * - opt-in: scripts will not run unless consent is given (gdpr compliant)
+     * - opt-out: scripts — that have categories set as enabled by default — will run without consent, until an explicit choice is made [string] */
+    mode: 'opt-in' | 'opt-out';
     /** Number of days before the cookie expires (182 days = 6 months) [number] */
     cookie_expiration: number;
     /** Specify if you want to set a different number of days - before the cookie expires - when the user accepts only the necessary categories [number] */
@@ -94,9 +94,8 @@ export default defineNuxtModule<ModuleOptions>({
         name: 'nuxtjs-cookieconsent',
         configKey: 'cookieconsent',
     },
-    // defaults: {},
     setup(options, nuxt) {
-        // Export Module Options
+        // Export Module Options to be able to use it in plugin
         const mockTemplate = addTemplate({
             filename: 'nuxtjs-cookieconsent-options.mjs',
             getContents() {
@@ -106,7 +105,7 @@ export default defineNuxtModule<ModuleOptions>({
         nuxt.options.alias['#nuxtjs-cookieconsent/options'] = mockTemplate.dst;
 
         const { resolve } = createResolver(import.meta.url);
-        addPlugin(resolve('./runtime/plugin'), options as AddPluginOptions);
+        addPlugin(resolve('./runtime/plugin'));
         nuxt.options.css.push('vanilla-cookieconsent/dist/cookieconsent.css');
     },
 });
