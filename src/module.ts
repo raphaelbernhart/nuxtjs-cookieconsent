@@ -5,7 +5,6 @@ import {
     addTemplate,
 } from '@nuxt/kit';
 
-// TODO - finish Module Options (https://github.com/orestbida/cookieconsent#key-features)
 export declare interface ModuleOptions {
     /** Show the cookie consent as soon as possible (otherwise you need to manually call the .show() method) [boolean] */
     autorun: boolean;
