@@ -106,7 +106,7 @@ export default defineNuxtModule<ModuleOptions>({
         nuxt.options.alias['#nuxtjs-cookieconsent/options'] = mockTemplate.dst;
 
         const { resolve } = createResolver(import.meta.url);
-        addPlugin(resolve('./runtime/plugin'), options as AddPluginOptions);
+        addPlugin(resolve('./runtime/plugin'));
         nuxt.options.css.push('vanilla-cookieconsent/dist/cookieconsent.css');
     },
 });
