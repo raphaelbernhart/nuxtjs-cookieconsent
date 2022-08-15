@@ -4,12 +4,25 @@ import options from '#nuxtjs-cookieconsent/options';
 import 'vanilla-cookieconsent/dist/cookieconsent.js';
 import { createHooks } from 'hookable';
 import cssHelper from './cssHelper';
+import { CookieConsent } from '../types/pluginTypes.d';
 
 export type HookTypes = {
     'cc:accepted': (value: string | Record<string, any>) => void;
     'cc:change': (value: string | Record<string, any>) => void;
     'cc:firstAction': (value: string | Record<string, any>) => void;
 };
+
+declare module '@nuxt/types' {
+    interface NuxtAppOptions {
+        $cookieconsent: CookieConsent;
+    }
+    interface NuxtApp {
+        $cookieconsent: CookieConsent;
+    }
+    interface Context {
+        $cookieconsent: CookieConsent;
+    }
+}
 
 export default defineNuxtPlugin((nuxtApp) => {
     try {
@@ -65,7 +78,7 @@ export default defineNuxtPlugin((nuxtApp) => {
 
         return {
             provide: {
-                cookieconsent,
+                cookieconsent: cookieconsent as CookieConsent,
             },
         };
     } catch (err) {
