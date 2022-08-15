@@ -94,9 +94,8 @@ export default defineNuxtModule<ModuleOptions>({
         name: 'nuxtjs-cookieconsent',
         configKey: 'cookieconsent',
     },
-    // defaults: {},
     setup(options, nuxt) {
-        // Export Module Options
+        // Export Module Options to be able to use it in plugin
         const mockTemplate = addTemplate({
             filename: 'nuxtjs-cookieconsent-options.mjs',
             getContents() {
