@@ -1,6 +1,6 @@
 {
-    "name": "nuxtjs-cookieconsent",
-    "version": "0.0.2",
+    "name": "nuxt-cookieconsent",
+    "version": "0.1.0",
     "license": "MIT",
     "type": "module",
     "repository": "https://github.com/raphaelbernhart/nuxt-cookieconsent.git",
@@ -23,17 +23,17 @@
         "dev:prepare": "nuxt-module-build --stub && nuxi prepare playground"
     },
     "dependencies": {
-        "@nuxt/kit": "^3.0.0-rc.6",
-        "vanilla-cookieconsent": "^2.8.5"
+        "@nuxt/kit": "^3.0.0",
+        "vanilla-cookieconsent": "^2.8.9"
     },
     "prettier": "@raphaelbernhart/prettier-config",
     "devDependencies": {
         "@nuxt/module-builder": "latest",
         "@nuxt/types": "^2.15.8",
         "@nuxtjs/eslint-config-typescript": "latest",
-        "@raphaelbernhart/prettier-config": "^1.0.1",
+        "@raphaelbernhart/prettier-config": "^1.1.1",
         "eslint": "latest",
         "eslint-config-prettier": "^8.5.0",
-        "nuxt": "^3.0.0-rc.6"
+        "nuxt": "^3.0.0"
     }
 }

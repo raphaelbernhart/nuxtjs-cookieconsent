@@ -6,6 +6,7 @@
     </div>
 </template>
 
+<!-- eslint-disable no-console -->
 <script setup>
 import { useNuxtApp } from '#app';
 
@@ -24,16 +25,16 @@ function deleteAllCookies() {
 
 onMounted(() => {
     app.$cookieconsent.hooks.hook('cc:accepted', (data) => {
-        console.log('Accept All');
-        console.log(data);
+        console.debug('Accept All');
+        console.debug(data);
     });
     app.$cookieconsent.hooks.hook('cc:change', (data) => {
-        console.log('Change');
-        console.log(data);
+        console.debug('Change');
+        console.debug(data);
     });
     app.$cookieconsent.hooks.hook('cc:firstAction', (data) => {
-        console.log('First Action');
-        console.log(data);
+        console.debug('First Action');
+        console.debug(data);
     });
 });
 </script>

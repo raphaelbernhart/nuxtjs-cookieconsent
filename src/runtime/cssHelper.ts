@@ -1,21 +1,28 @@
+const updateCssVariable = (
+    name: string,
+    value: string,
+    parentElement: HTMLElement,
+) => {
+    parentElement?.style.setProperty(name, value);
+};
+
+const parseCssVariableName = (optionName: string): string => {
+    const prefix = '--cc';
+    if (typeof optionName !== 'string') return '';
+
+    const splittedOptionName = optionName.split(/(?=[A-Z])/);
+    const lowerCaseSplittedOptionName = splittedOptionName.map((item) => {
+        return `-${item.toLowerCase()}`;
+    });
+    return prefix + lowerCaseSplittedOptionName.join('');
+};
+
 const cssHelper = (styles: Record<string, any>) => {
-    const rootElement = document.querySelector(':root');
-    const darkRootElement = document.querySelector('.c_darkmode');
+    const rootElement: HTMLElement | null = document.querySelector(':root');
+    const darkRootElement: HTMLElement | null =
+        document.querySelector('.c_darkmode');
 
-    const updateCssVariable = (name, value, parentElement) => {
-        parentElement?.style.setProperty(name, value);
-    };
-
-    const parseCssVariableName = (optionName: string): string => {
-        const prefix = '--cc';
-        if (typeof optionName !== 'string') return '';
-
-        const splittedOptionName = optionName.split(/(?=[A-Z])/);
-        const lowerCaseSplittedOptionName = splittedOptionName.map((item) => {
-            return `-${item.toLowerCase()}`;
-        });
-        return prefix + lowerCaseSplittedOptionName.join('');
-    };
+    if (!rootElement && !darkRootElement) return;
 
     const optionsArray = Object.entries(styles);
     for (let i = 0; optionsArray.length > i; i++) {
@@ -33,6 +40,11 @@ const cssHelper = (styles: Record<string, any>) => {
 
                 const parsedDarkStyleKey = parseCssVariableName(darkStylesKey);
 
+                if (!darkStylesValue || typeof darkStylesValue !== 'string')
+                    continue;
+
+                if (!darkRootElement) continue;
+
                 updateCssVariable(
                     parsedDarkStyleKey,
                     darkStylesValue,
@@ -43,6 +55,8 @@ const cssHelper = (styles: Record<string, any>) => {
         }
 
         const parsedKey = parseCssVariableName(key);
+
+        if (!rootElement) continue;
         updateCssVariable(parsedKey, value, rootElement);
     }
 };
