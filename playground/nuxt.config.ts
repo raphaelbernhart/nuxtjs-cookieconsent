@@ -1,12 +1,11 @@
-import { defineNuxtConfig } from 'nuxt';
 import cookieconsent from '..';
 
 export default defineNuxtConfig({
-    modules: [cookieconsent],
+    modules: [cookieconsent as any],
     cookieconsent: {
         autorun: true,
         autoclear_cookies: true,
-        force_consent: true,
+        force_consent: false,
         languages: {
             en: {
                 consent_modal: {
@@ -15,11 +14,11 @@ export default defineNuxtConfig({
                         'Hi, this website uses essential cookies to ensure its proper operation and tracking cookies to understand how you interact with it. The latter will be set only upon approval. <a aria-label="Cookie policy" class="cc-link" href="#">Read more</a>',
                     primary_btn: {
                         text: 'Accept',
-                        role: 'accept_all', // 'accept_selected' or 'accept_all'
+                        role: 'accept_all',
                     },
                     secondary_btn: {
                         text: 'Settings',
-                        role: 'settings', // 'settings' or 'accept_necessary'
+                        role: 'settings',
                     },
                 },
                 settings_modal: {
@@ -90,21 +89,24 @@ export default defineNuxtConfig({
             consent_modal: {
                 layout: 'cloud',
                 transition: 'slide',
-                position: 'middle center',
+                position: 'bottom left',
             },
         },
         styles: {
             dark: {
-                enabledByDefault: false,
+                enabledByDefault: true,
                 bg: 'black',
                 text: 'white',
                 btnPrimaryBg: 'white',
                 btnPrimaryText: 'black',
             },
-            bg: '#ac1b1b',
-            text: 'white',
-            btnPrimaryBg: 'orange',
-            btnPrimaryText: 'red',
+            bg: 'orange',
+            text: 'black',
+            btnPrimaryBg: 'white',
+            btnPrimaryText: 'black',
+            btnPrimaryHoverBg: 'lightgray',
+            btnSecondaryBg: 'lightgray',
+            btnSecondaryText: 'black',
         },
     },
 });

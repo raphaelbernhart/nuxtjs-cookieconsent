@@ -1,28 +1,15 @@
-/* eslint-disable import/order */
 import { defineNuxtPlugin } from '#app';
-import options from '#nuxtjs-cookieconsent/options';
 import 'vanilla-cookieconsent/dist/cookieconsent.js';
 import { createHooks } from 'hookable';
-import cssHelper from './cssHelper';
 import { CookieConsent } from '../types/pluginTypes.d';
+import cssHelper from './cssHelper';
+import options from '#nuxtjs-cookieconsent/options';
 
 export type HookTypes = {
     'cc:accepted': (value: string | Record<string, any>) => void;
     'cc:change': (value: string | Record<string, any>) => void;
     'cc:firstAction': (value: string | Record<string, any>) => void;
 };
-
-declare module '@nuxt/types' {
-    interface NuxtAppOptions {
-        $cookieconsent: CookieConsent;
-    }
-    interface NuxtApp {
-        $cookieconsent: CookieConsent;
-    }
-    interface Context {
-        $cookieconsent: CookieConsent;
-    }
-}
 
 export default defineNuxtPlugin((nuxtApp) => {
     try {
@@ -61,13 +48,13 @@ export default defineNuxtPlugin((nuxtApp) => {
         };
 
         // CC Hooks
-        ccOptions.onAccept = (data) => {
+        ccOptions.onAccept = (data: string | Record<string, any>) => {
             hooks.callHook('cc:accepted', data);
         };
-        ccOptions.onChange = (data) => {
+        ccOptions.onChange = (data: string | Record<string, any>) => {
             hooks.callHook('cc:change', data);
         };
-        ccOptions.onFirstAction = (data) => {
+        ccOptions.onFirstAction = (data: string | Record<string, any>) => {
             hooks.callHook('cc:firstAction', data);
         };
 
@@ -81,7 +68,5 @@ export default defineNuxtPlugin((nuxtApp) => {
                 cookieconsent: cookieconsent as CookieConsent,
             },
         };
-    } catch (err) {
-        console.error(err);
-    }
+    } catch (err) {}
 });

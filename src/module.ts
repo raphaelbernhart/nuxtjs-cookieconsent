@@ -4,6 +4,7 @@ import {
     createResolver,
     addTemplate,
 } from '@nuxt/kit';
+import defaultModuleConfiguration from './config/defaultModuleConfiguration';
 
 export declare interface ModuleOptions {
     /** Show the cookie consent as soon as possible (otherwise you need to manually call the .show() method) [boolean] */
@@ -20,71 +21,64 @@ export declare interface ModuleOptions {
     cookie_expiration: number;
     /** Specify if you want to set a different number of days - before the cookie expires - when the user accepts only the necessary categories [number] */
     cookie_necessary_only_expiration: number;
-    /** Specify if you want to set a different number of days - before the cookie expires - when the user accepts only the necessary categories [number] */
+    /** Path where the cookie will be set */
     cookie_path: string;
-    /** Specify if you want to set a different number of days - before the cookie expires - when the user accepts only the necessary categories [number] */
+    /** Specify your domain (will be grabbed by default) or a subdomain */
     cookie_domain: string;
-    /** Specify if you want to set a different number of days - before the cookie expires - when the user accepts only the necessary categories [number] */
+    /** SameSite attribute */
     cookie_same_site: string;
-    /** Specify if you want to set a different number of days - before the cookie expires - when the user accepts only the necessary categories [number] */
+    /** Enable if you want the value of the cookie to be rfc compliant */
     use_rfc_cookie: boolean;
-    /** Specify if you want to set a different number of days - before the cookie expires - when the user accepts only the necessary categories [number] */
+    /** Enable if you want to block page navigation until user action (check faq for a proper implementation) */
     force_consent: boolean;
-    /** Specify if you want to set a different number of days - before the cookie expires - when the user accepts only the necessary categories [number] */
+    /** Specify this option to enable revisions. Check below for a proper usage */
     revision: number;
-    /** Specify if you want to set a different number of days - before the cookie expires - when the user accepts only the necessary categories [number] */
+    /** Specify one of the languages you have defined (can also be dynamic): 'en', 'de' ... */
     current_lang: string;
-    /** Specify if you want to set a different number of days - before the cookie expires - when the user accepts only the necessary categories [number] */
+    /** Language auto-detection strategy. Null to disable (default), "browser" to get user's browser language or "document" to read value from <html lang="..."> of current page. If language is not defined => use specified current_lang */
     auto_language: string;
-    /** Specify if you want to set a different number of days - before the cookie expires - when the user accepts only the necessary categories [number] */
+    /** Enable if you want to automatically delete cookies when user opts-out of a specific category inside cookie settings */
     autoclear_cookies: boolean;
-    /** Specify if you want to set a different number of days - before the cookie expires - when the user accepts only the necessary categories [number] */
+    /** Enable if you want to easily manage existing <script> tags. Check manage third party scripts */
     page_scripts: boolean;
-    /** Specify if you want to set a different number of days - before the cookie expires - when the user accepts only the necessary categories [number] */
+    /** Enable if you want to remove the html cookie tables (but still want to make use of autoclear_cookies) */
     remove_cookie_tables: boolean;
-    /** Specify if you want to set a different number of days - before the cookie expires - when the user accepts only the necessary categories [number] */
+    /** Enable if you don't want the plugin to run when a bot/crawler/webdriver is detected */
     hide_from_bots: boolean;
-    /** Specify if you want to set a different number of days - before the cookie expires - when the user accepts only the necessary categories [number] */
-    gui_options: object;
-    /** Specify if you want to set a different number of days - before the cookie expires - when the user accepts only the necessary categories [number] */
+    /** Customization option which allows to choose layout, position and transition. Check layout options & customization */
+    gui_options: {
+        consent_modal: {
+            layout: string;
+            transition: string;
+            position: string;
+        };
+    };
+    /** Method run on:
+    1. the moment the cookie consent is accepted
+    2. after each page load (if cookie consent has already been accepted) */
     onAccept: Function;
-    /** Specify if you want to set a different number of days - before the cookie expires - when the user accepts only the necessary categories [number] */
+    /** Method run whenever preferences are modified (and only if cookie consent has already been accepted) */
     onChange: Function;
-    /** Specify if you want to set a different number of days - before the cookie expires - when the user accepts only the necessary categories [number] */
+    /** Method run only once when the user makes the initial choice (accept/reject) */
     onFirstAction: Function;
-    /** Specify if you want to set a different number of days - before the cookie expires - when the user accepts only the necessary categories [number] */
+    /** Languages is an object which basically holds all of the text/html of your cookie modals in different languages. In here you can define cookie categories, cookie tables, opt-in/out toggle for each category and more. For each language, a consent_modal object and a settings_modal object must be configured. */
     languages: object;
     /** Style the Cookie Consent */
     styles: {
-        background: string;
-        text: string;
-        buttons: {
-            main: {
-                background: string;
-                text: string;
-                hover: string;
-            };
-            secondary: {
-                background: string;
-                text: string;
-                hover: string;
-            };
-        };
-        dark: {
-            background: string;
+        bg?: string;
+        text?: string;
+        btnPrimaryBg?: string;
+        btnPrimaryText?: string;
+        btnPrimaryHoverBg?: string;
+        btnSecondaryBg?: string;
+        btnSecondaryText?: string;
+        btnSecondaryHoverBg?: string;
+        dark?: {
+            enabledByDefault: true;
+            bg: string;
             text: string;
-            buttons: {
-                main: {
-                    background: string;
-                    text: string;
-                    hover: string;
-                };
-                secondary: {
-                    background: string;
-                    text: string;
-                    hover: string;
-                };
-            };
+            btnPrimaryBg: string;
+            btnPrimaryText: string;
         };
     };
 }
@@ -94,6 +88,7 @@ export default defineNuxtModule<ModuleOptions>({
         name: 'nuxtjs-cookieconsent',
         configKey: 'cookieconsent',
     },
+    defaults: defaultModuleConfiguration as ModuleOptions,
     setup(options, nuxt) {
         // Export Module Options to be able to use it in plugin
         const mockTemplate = addTemplate({
