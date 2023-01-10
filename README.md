@@ -4,12 +4,12 @@
 
 ## Installation
 
-1. Install the plugin -> `yarn install nuxt-cookieconsent`
+1. Install the plugin -> `yarn install nuxtjs-cookieconsent`
 2. Add the plugin to the nuxt config
 
     ```
     export default defineNuxtConfig({
-        modules: ['nuxt-cookieconsent'],
+        modules: ['nuxtjs-cookieconsent'],
     })
     ```
 
@@ -21,7 +21,7 @@ Configure the plugin in the `nuxt.config.js`.
 
 All the options are just a reference of the library config (please see the [library docs](https://github.com/orestbida/cookieconsent#all-configuration-options) for more information).
 
-To help a bit with the styling a style option was added with which you can style the cookieconsent more easily (See [below](https://github.com/raphaelbernhart/nuxt-cookieconsent#consent-styling)).
+To help a bit with the styling a style option was added with which you can style the cookieconsent more easily (See [below](https://github.com/raphaelbernhart/nuxtjs-cookieconsent#consent-styling)).
 
 ## Consent Styling
 
@@ -29,4 +29,4 @@ There is a option called `styles` in the config you can use for styling your con
 
 ## Nuxt Version Support
 
-This plugin currently just supports Nuxt v3. If you need it to also support Nuxt v2 please take part of this [poll](https://github.com/raphaelbernhart/nuxt-cookieconsent/discussions/4https://)
+This plugin currently just supports Nuxt v3. If you need it to also support Nuxt v2 please take part of this [poll](https://github.com/raphaelbernhart/nuxtjs-cookieconsent/discussions/4https://)
